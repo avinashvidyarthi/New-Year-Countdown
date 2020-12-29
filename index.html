@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="New Year Countdown" />
+    <link rel="icon" href="https://avinashvidyarthi.tech/img/p1.jpg" type="image/jpg" sizes="16x16" />
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <title>New Year CountDown</title>
+    <style>
+        body { 
+            background: url("./back.jpg") no-repeat center center fixed; 
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+        #container{
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+    </style>
+  </head>
+  <body>
+      <div class="container-fluid text-white" id="container" style="height: 100vh;">
+        <div class="row h-100">
+            <div class="col-md-3"></div>
+            <div class="col-md-6 text-center my-auto">
+                <h1>New Year Countdown</h1>
+                <div class="container-fluid mt-4" style="border: 2px solid white; padding: 10px; border-radius: 5px;">
+                    <div class="row">
+                        <div class="col">
+                            <span style="font-size: 60px;" id="days">00</span><br>DAYS
+                        </div>
+                        <div class="col">
+                            <span style="font-size: 60px;" id="hrs">00</span><br>HOURS
+                        </div>
+                        <div class="col">
+                            <span style="font-size: 60px;" id="min">00</span><br>MIN
+                        </div>
+                        <div class="col">
+                            <span style="font-size: 60px;" id="sec">00</span><br>SEC
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+      </div>
+      <script>
+          const daysSection = document.getElementById("days");
+          const hrsSection = document.getElementById("hrs");
+          const minSection = document.getElementById("min");
+          const secSection = document.getElementById("sec");
+
+          function round(k){
+              if(k<10){
+                  return "0"+k;
+              }
+              return k;
+          }
+
+          function setData() {
+            date_future = new Date(new Date().getFullYear() +1, 0, 1);
+            date_now = new Date();
+
+            seconds = Math.floor((date_future - (date_now))/1000);
+            minutes = Math.floor(seconds/60);
+            hours = Math.floor(minutes/60);
+            days = Math.floor(hours/24);
+            
+            hours = hours-(days*24);
+            minutes = minutes-(days*24*60)-(hours*60);
+            seconds = seconds-(days*24*60*60)-(hours*60*60)-(minutes*60);
+            daysSection.innerText = round(days);
+            hrsSection.innerText = round(hours);
+            minSection.innerText = round(minutes);
+            secSection.innerText = round(seconds)
+          }
+
+          setInterval(setData,1000);
+          setData()
+
+      </script>
+  </body>
+</html>
